@@ -10,7 +10,7 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   const posts = await axios
     .get("/posts")
     .catch((error) => console.log("Error", error));
-  return posts;
+  return posts.data;
 });
 
 const postsSlice = createSlice({
@@ -32,7 +32,7 @@ const postsSlice = createSlice({
       return {
         ...state,
         loading: false,
-        posts: payload.data,
+        posts: payload,
       };
     },
     [fetchPosts.rejected]: (state) => {
